@@ -1,7 +1,7 @@
-KERNEL_DIR=private/gs-google
+KERNEL_DIR=gs201/private/gs-google
 
 DEFCONFIG=tangorpro_gki_defconfig
-GKI_FRAGMENT_DEFCONFIG="${KERNEL_DIR}/arch/arm64/configs/cloudripper_gki.fragment ${ROOT_DIR}/private/devices/google/tangorpro/tangorpro_gki.fragment"
+GKI_FRAGMENT_DEFCONFIG="${KERNEL_DIR}/arch/arm64/configs/cloudripper_gki.fragment ${ROOT_DIR}/gs201/private/devices/google/tangorpro/tangorpro_gki.fragment"
 VENDOR_RAMDISK_BINARY=${ROOT_DIR}/private/devices/google/tangorpro/vendor_ramdisk-tangorpro.img
 
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gs101
@@ -41,7 +41,7 @@ fi
 POST_KERNEL_BUILD_CMDS="concat_vendor_boot_modules"
 function concat_vendor_boot_modules() {
   cat ${KERNEL_DIR}/vendor_kernel_boot_modules.gs201 \
-    private/devices/google/tangorpro/vendor_kernel_boot_modules.tangorpro > \
+    gs201/private/devices/google/tangorpro/vendor_kernel_boot_modules.tangorpro > \
     ${OUT_DIR}/vendor_kernel_boot_modules.concat
   MODULES_LIST=${OUT_DIR}/vendor_kernel_boot_modules.concat
 }
@@ -53,7 +53,7 @@ function modify_vendor_ramdisk() {
   ln -f init.recovery.gs201.rc init.recovery.tangorpro.rc
 }
 
-EXT_MODULES_MAKEFILE=private/devices/google/tangorpro/Makefile.ext_modules.tangorpro
+EXT_MODULES_MAKEFILE=gs201/private/devices/google/tangorpro/Makefile.ext_modules.tangorpro
 # Explicitly clear EXT_MODULES because build.config.gs101 might set it to
 # "private/google-modules/uwb/kernel" which we don't want because uwb/kernel is
 # already built by Makefile.ext_modules.tangorpro
